@@ -19,4 +19,5 @@ struct RxSwiftViewModel {
             return text.count.ToString()
         }
     }
+    
 }

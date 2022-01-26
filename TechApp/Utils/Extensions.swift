@@ -13,6 +13,11 @@ extension Int {
         return "\(self)"
     }
 }
+extension String {
+    internal func ToDouble() -> Double{
+        return Double(self) ?? 0
+    }
+}
 extension UIViewController {
     static let hud = JGProgressHUD(style: .dark)
     func showLoader(_ show: Bool, withText text: String? = "Loading") {
