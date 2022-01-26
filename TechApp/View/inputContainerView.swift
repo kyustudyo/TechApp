@@ -10,10 +10,8 @@ import UIKit
 class InputContainerView : UIView {
     init(textField: UITextField) {
         super.init(frame: .zero)
-        
         self.translatesAutoresizingMaskIntoConstraints = false
         self.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
         let lable = UILabel()
         addSubview(lable)
         lable.font = UIFont.systemFont(ofSize: 16)
@@ -22,8 +20,6 @@ class InputContainerView : UIView {
         lable.anchor(left:self.leftAnchor,bottom: bottomAnchor,paddingLeft: 4)
         lable.text = "년도입력:"
         addSubview(textField)
-        
-        
         textField.centerY(inView: self)
         textField.anchor(left: lable.rightAnchor, bottom: bottomAnchor, paddingLeft: 4, paddingBottom:  -4)
 

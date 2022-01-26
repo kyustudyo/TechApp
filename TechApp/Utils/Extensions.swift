@@ -8,7 +8,11 @@
 import Foundation
 import UIKit
 import JGProgressHUD
-
+extension Int {
+    internal func ToString() -> String{
+        return "\(self)"
+    }
+}
 extension UIViewController {
     static let hud = JGProgressHUD(style: .dark)
     func showLoader(_ show: Bool, withText text: String? = "Loading") {
