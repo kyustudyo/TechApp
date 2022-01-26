@@ -13,7 +13,7 @@ class FirebaseWebservice {
     static func fetchMyInfo(completion: @escaping (MyInformation)->Void) {
         let query = COLLECTION_MYINFO.document("itsMe").getDocument { snapshot, error in
             guard let dictionary = snapshot?.data() else {return}
-            //print(dictionary)
+            print("dict:",dictionary)
             let info = MyInformation.init(dictionary: dictionary)
             //print(info)
             

@@ -60,12 +60,11 @@ class AccidentsTableController : UITableViewController {
     }
     
     // MARK : Helpers
-    
+    //바버튼아이템
     func configureUI(){
         configureTableView()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissal))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action:#selector(addAccident))
-    
     }
     
     func configureTableView(){
@@ -94,6 +93,7 @@ extension AccidentsTableController {
 extension AccidentsTableController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
+        
         if cell?.accessoryView?.isHidden == false {
             cell?.accessoryView?.isHidden.toggle()
         } else {
@@ -104,6 +104,7 @@ extension AccidentsTableController {
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryView?.isHidden = true
+        //위에서 히든 관련햇기때문에 없어도 될듯
     }
     
 }
