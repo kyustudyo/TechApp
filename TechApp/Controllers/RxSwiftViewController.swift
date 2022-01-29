@@ -14,6 +14,9 @@ import RxBinding
 class RxSwiftViewController : UIViewController{
     private let disposeBag = DisposeBag()
     
+    var topConstraint: Constraint? = nil
+    var leftConstraint: Constraint? = nil
+    
     private let textFeild: UITextField = {
         let textField = UITextField()
         textField.textAlignment = .center
@@ -32,6 +35,51 @@ class RxSwiftViewController : UIViewController{
         return label
     }()
     
+    private let constraintLabel: UILabel = {
+        let label = UILabel()
+        label.layer.cornerRadius = 8
+        label.backgroundColor = .red
+        label.text = "hihihi"
+        return label
+    }()
+    
+    private let deactivateConstraintButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .systemGray
+        button.titleLabel?.text = "button!"
+        button.addTarget(self, action: #selector(applyConstraint), for: .touchUpInside)
+        button.titleLabel?.textColor = .black
+        return button
+    }()
+    
+    private let activateConstraintButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .brown
+        button.titleLabel?.text = "button!"
+        button.titleLabel?.textColor = .black
+        button.addTarget(self, action: #selector(applyConstraint2), for: .touchUpInside)
+        return button
+    }()
+    
+    private let updateConstraintButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .cyan
+        button.titleLabel?.text = "button!"
+        button.titleLabel?.textColor = .black
+        button.addTarget(self, action: #selector(applyConstraint3), for: .touchUpInside)
+        return button
+    }()
+    
+    private let remakeConstraintButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .magenta
+        button.titleLabel?.text = "button!"
+        button.titleLabel?.textColor = .black
+        button.addTarget(self, action: #selector(applyConstraint4), for: .touchUpInside)
+        return button
+    }()
+    
+    
     lazy var ProgressView: UIView = {
       let v = UIView(frame: .zero)
       v.backgroundColor = .systemGray
@@ -47,9 +95,10 @@ class RxSwiftViewController : UIViewController{
         view.addSubview(textFeild)
         view.addSubview(countLabel)
         view.addSubview(ProgressView)
+        view.addSubview(constraintLabel)
+        
         createConstraints()
         configureRxSwift()
-        
         
     }
     
@@ -73,6 +122,7 @@ class RxSwiftViewController : UIViewController{
     
     
     private func createConstraints(){
+        
         textFeild.snp.makeConstraints {
             $0.left.equalToSuperview().offset(15)
             $0.right.equalToSuperview().offset(-15)
@@ -91,10 +141,47 @@ class RxSwiftViewController : UIViewController{
             $0.height.equalTo(16)
             $0.leading.equalToSuperview()
         }
+        constraintLabel.snp.makeConstraints { (make) -> Void in
+            self.topConstraint = make.top.equalTo(ProgressView.snp_bottomMargin).offset(0).constraint
+            
+            self.leftConstraint =  make.left.equalTo(ProgressView.snp_leftMargin).offset(50).constraint
+            
+            make.height.equalTo(80)
+        }
+        let stack = UIStackView(arrangedSubviews: [deactivateConstraintButton,activateConstraintButton,updateConstraintButton,remakeConstraintButton])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        view.addSubview(stack)
+        
+        stack.snp.makeConstraints{
+            $0.top.equalTo(constraintLabel.snp_bottomMargin).offset(80)
+            $0.leading.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().offset(-8)
+                    }
+        
+        
     }
     
 // MARK: - Helpers
-    
+    @objc func applyConstraint(){
+        topConstraint?.deactivate()
+        leftConstraint?.deactivate()
+    }
+    @objc func applyConstraint2(){
+        topConstraint?.activate()
+        leftConstraint?.activate()
+    }
+    @objc func applyConstraint3(){
+        topConstraint?.update(offset: 10)
+    }
+    @objc func applyConstraint4(){
+        constraintLabel.snp.remakeConstraints{make in
+            self.topConstraint = make.top.equalTo(ProgressView.snp_bottomMargin).offset(120).constraint
+            
+            self.leftConstraint =  make.left.equalTo(ProgressView.snp_leftMargin).offset(120).constraint
+        }
+        
+    }
     private func updateProgress(to progress: String) {
         let value = progress.ToDouble()
         ProgressView.snp.remakeConstraints{ make in
@@ -111,3 +198,15 @@ class RxSwiftViewController : UIViewController{
     
 }
 
+
+
+
+//// when making constraints
+//
+//
+//...
+//// then later you can call
+//self.topConstraint.deactivate()
+//
+//// or if you want to update the constraint
+//self.topConstraint.updateOffset(5)
