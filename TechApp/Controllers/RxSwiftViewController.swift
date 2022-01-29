@@ -39,15 +39,15 @@ class RxSwiftViewController : UIViewController{
         let label = UILabel()
         label.layer.cornerRadius = 8
         label.backgroundColor = .red
-        label.text = "hihihi"
+        label.text = "test label"
         return label
     }()
     
     private let deactivateConstraintButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray
-        button.titleLabel?.text = "button!"
-        button.addTarget(self, action: #selector(applyConstraint), for: .touchUpInside)
+        button.setTitle("deactivate", for: .normal)
+//        button.addTarget(self, action: #selector(applyConstraint), for: .touchUpInside)
         button.titleLabel?.textColor = .black
         return button
     }()
@@ -55,7 +55,7 @@ class RxSwiftViewController : UIViewController{
     private let activateConstraintButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .brown
-        button.titleLabel?.text = "button!"
+        button.setTitle("activate", for: .normal)
         button.titleLabel?.textColor = .black
         button.addTarget(self, action: #selector(applyConstraint2), for: .touchUpInside)
         return button
@@ -64,7 +64,7 @@ class RxSwiftViewController : UIViewController{
     private let updateConstraintButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .cyan
-        button.titleLabel?.text = "button!"
+        button.setTitle("update", for: .normal)
         button.titleLabel?.textColor = .black
         button.addTarget(self, action: #selector(applyConstraint3), for: .touchUpInside)
         return button
@@ -73,7 +73,7 @@ class RxSwiftViewController : UIViewController{
     private let remakeConstraintButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .magenta
-        button.titleLabel?.text = "button!"
+        button.setTitle("remake", for: .normal)
         button.titleLabel?.textColor = .black
         button.addTarget(self, action: #selector(applyConstraint4), for: .touchUpInside)
         return button
@@ -117,6 +117,14 @@ class RxSwiftViewController : UIViewController{
         viewModel.textCount.subscribe(onNext:{
             self.updateProgress(to: $0)
         }).disposed(by: disposeBag)
+        
+        //rx instead of adding target.
+        deactivateConstraintButton.rx.controlEvent(.touchUpInside)
+            .asObservable()
+            .subscribe(onNext:{
+                self.topConstraint?.deactivate()
+                self.leftConstraint?.deactivate()
+            }).disposed(by: disposeBag)
     }
     
     
@@ -142,7 +150,7 @@ class RxSwiftViewController : UIViewController{
             $0.leading.equalToSuperview()
         }
         constraintLabel.snp.makeConstraints { (make) -> Void in
-            self.topConstraint = make.top.equalTo(ProgressView.snp_bottomMargin).offset(0).constraint
+            self.topConstraint = make.top.equalTo(ProgressView.snp_bottomMargin).offset(20).constraint
             
             self.leftConstraint =  make.left.equalTo(ProgressView.snp_leftMargin).offset(50).constraint
             
@@ -163,10 +171,10 @@ class RxSwiftViewController : UIViewController{
     }
     
 // MARK: - Helpers
-    @objc func applyConstraint(){
-        topConstraint?.deactivate()
-        leftConstraint?.deactivate()
-    }
+//    @objc func applyConstraint(){
+//        topConstraint?.deactivate()
+//        leftConstraint?.deactivate()
+//    }
     @objc func applyConstraint2(){
         topConstraint?.activate()
         leftConstraint?.activate()
@@ -174,7 +182,7 @@ class RxSwiftViewController : UIViewController{
     @objc func applyConstraint3(){
         topConstraint?.update(offset: 10)
     }
-    @objc func applyConstraint4(){
+    @objc func applyConstraint4(){//remove original one and make new
         constraintLabel.snp.remakeConstraints{make in
             self.topConstraint = make.top.equalTo(ProgressView.snp_bottomMargin).offset(120).constraint
             
