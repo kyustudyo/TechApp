@@ -42,9 +42,6 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
                   self.cautionLabel.text = "error.."
               }
             }.disposed(by: disposeBag)
-//            .asDriver(onErrorJustReturn: "error but..")
-//            .drive(cautionLabel.rx.text)
-//          .disposed(by: disposeBag)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -94,6 +91,14 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
         present(nav, animated: true, completion: nil)
     }
     
+    @IBAction func GoRxSwift2(_ sender: UIButton) {
+        let controller = RxSwiftViewController2()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func GoRxSwift(_ sender: UIButton) {
         let controller = RxSwiftViewController()
         let nav = UINavigationController(rootViewController: controller)
@@ -101,6 +106,8 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
         present(nav, animated: true, completion: nil)
         
     }
+    
+    
     
     @IBAction func fetchAccident(_ sender: UIButton) {
         showLoader(true)
