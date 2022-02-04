@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MeViewController: UIViewController {//디스크에서 가져오기.
    
@@ -19,14 +21,21 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
     @IBOutlet var field: UILabel?
     @IBOutlet var company: UILabel?
     @IBOutlet var contents: UITextView!
+    
+    @IBOutlet weak var cautionLabel: UILabel!
     private var locationAndInjuredVM : LocationAndInjuredViewModel?
     private var myInformationVM: MyInfoViewModel?
-   
+    private let disposeBag = DisposeBag()
     // MARK - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUser()
+        loadText(from: "techApp")
+            .asDriver(onErrorJustReturn: "error but..")
+            .map{"\($0)"}
+            .drive(cautionLabel.rx.text)
+          .disposed(by: disposeBag)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -47,6 +56,26 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
     }
 
     // MARK  - Helper
+    func loadText(from name: String) -> Single<String> {
+      return Single.create { single in
+        let disposable = Disposables.create()
+          guard let path = Bundle.main.path(forResource: name, ofType: "txt") else {
+              single(.failure(FileReadError.fileNotFound))
+              
+              return disposable
+          }
+        guard let data = FileManager.default.contents(atPath: path) else {
+            single(.failure(FileReadError.unreadable))
+          return disposable
+        }
+        guard let contents = String(data: data, encoding: .utf8) else {
+          single(.failure(FileReadError.encodingFailed))
+          return disposable
+        }
+        single(.success(contents))
+        return disposable
+      }
+    }
     
     @IBAction func goToAccident(_ sender: UIButton) {
         let controller = AccidentsTableController()
@@ -64,7 +93,6 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
         
     }
     
-    
     @IBAction func fetchAccident(_ sender: UIButton) {
         showLoader(true)
         self.fetchAccidentFromFirebase{
@@ -79,11 +107,9 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
             self.contents.text = self.contents.text +  "\n\(self.locationAndInjuredVM!.location)에서\n\(self.locationAndInjuredVM!.injured)명 사고 발생했습니다."
             completion()
             //self.showLoader(false)
-            
         }
     }
 }
-
 extension MeViewController : AccidentControllerDelegate {
     func controller( vm: AccidentViewModel) {
         guard let resultInjured = vm.resultInjured , let resultLocation = vm.resultLocation else {return}
@@ -98,8 +124,11 @@ extension MeViewController : AccidentControllerDelegate {
 }
 
 
-
-
-
-
-
+extension MeViewController {
+    
+    enum FileReadError: Error {
+      case fileNotFound, unreadable, encodingFailed
+    }
+    
+    
+}

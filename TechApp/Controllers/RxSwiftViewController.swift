@@ -24,7 +24,7 @@ class RxSwiftViewController : UIViewController{
         textField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         textField.layer.cornerRadius = 5
         textField.layer.masksToBounds = true
-        textField.becomeFirstResponder()
+//        textField.becomeFirstResponder()
         return textField
     }()
     
@@ -103,7 +103,7 @@ class RxSwiftViewController : UIViewController{
     }
     
     private func configureNavigationBar(){
-        navigationItem.title = "RxSwift + SnapKit"
+        navigationItem.title = "RxSwift + SnapKit experiment"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(goBack))
     }
@@ -134,7 +134,7 @@ class RxSwiftViewController : UIViewController{
         textFeild.snp.makeConstraints {
             $0.left.equalToSuperview().offset(15)
             $0.right.equalToSuperview().offset(-15)
-            $0.top.equalToSuperview().offset(80)
+            $0.top.equalToSuperview().offset(160)
             $0.height.equalTo(50)
         }
         
