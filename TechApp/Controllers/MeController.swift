@@ -32,10 +32,19 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
         super.viewDidLoad()
         fetchUser()
         loadText(from: "techApp")
-            .asDriver(onErrorJustReturn: "error but..")
-            .map{"\($0)"}
-            .drive(cautionLabel.rx.text)
-          .disposed(by: disposeBag)
+            .subscribe {
+              // 3
+              switch $0 {
+              case .success(let string):
+                  self.cautionLabel.text = string
+              case .failure(let error):
+                  print(error)
+                  self.cautionLabel.text = "error.."
+              }
+            }.disposed(by: disposeBag)
+//            .asDriver(onErrorJustReturn: "error but..")
+//            .drive(cautionLabel.rx.text)
+//          .disposed(by: disposeBag)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
