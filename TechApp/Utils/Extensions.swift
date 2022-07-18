@@ -117,3 +117,20 @@ extension UIView {
     
     
 }
+extension Int {
+    
+    func toString() -> String {
+        return "\(self)"
+    }
+}
+extension Double {
+    
+    func toString() -> String {
+        return String(format: "%.1f", self)
+    }
+    
+    func toInt() -> Int {
+        return Int(self)
+    }
+    
+}
