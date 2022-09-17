@@ -11,20 +11,24 @@ struct Accident : Decodable {
     var resultCode: String
     var resultMsg:String
     var items: Items
-}//가고 오게될 모형.
-struct Items:Decodable {
-    var item: [multipleInfo]
 }
-struct multipleInfo: Decodable {//simple sample
+
+struct Items:Decodable {
+    var item: [LocationInjured]
+}
+
+struct LocationInjured: Decodable {//simple sample
     var spot_nm :String
     var sl_dnv_cnt : Int
     init(dictionary: [String: Any]) {
         self.spot_nm = dictionary["location"] as? String ?? ""//type casting
         self.sl_dnv_cnt = dictionary["injured"] as? Int ?? 0
-        
     }
 }
 
+extension LocationInjured {
+    static let Dummy: LocationInjured = LocationInjured(dictionary: { [ "location": "", "injured": 0]}())
+}
 
 //"resultCode":"00",
 //"resultMsg":"NORMAL_CODE",

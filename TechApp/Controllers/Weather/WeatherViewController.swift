@@ -12,19 +12,22 @@ import RxSwift
 import RxCocoa
 
 class WeatherViewController:UIViewController {
+    
     private let weatherViewModel = WeatherViewModel()
+    
     lazy var conditionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "circle")
+        imageView.image = UIImage(named: "climate")
         self.view.addSubview(imageView)
         return imageView
     }()
+    
     lazy var temperatureLabel: UILabel = {
       let lbl = UILabel(frame: .zero)
       lbl.numberOfLines = 0
       lbl.textAlignment = .center
       lbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        lbl.text = "~~"
+      lbl.text = "~~"
       self.view.addSubview(lbl)
       return lbl
     }()
@@ -34,7 +37,7 @@ class WeatherViewController:UIViewController {
       lbl.numberOfLines = 0
       lbl.textAlignment = .center
       lbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        lbl.text = "``"
+      lbl.text = "``"
       self.view.addSubview(lbl)
       return lbl
     }()
@@ -52,13 +55,13 @@ class WeatherViewController:UIViewController {
             this.handleResult(result)
         }
     }
+    
     private func handleResult(_ result: Result<WeatherModel, Error>) {
         switch result {
         case .success(let model):
             updateView(with: model)
         case .failure(let error):
             print("error")
-//            handleError(error)
         }
     }
     
@@ -74,9 +77,10 @@ class WeatherViewController:UIViewController {
         view.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "The weather?"
+        navigationItem.title = "The Weather"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(goBack))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(plusWeather))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(plusWeather))
+        
         conditionImageView.snp.makeConstraints{ make in
             make.height.equalTo(view.snp.height).multipliedBy(0.5)
             make.width.equalToSuperview()
@@ -95,10 +99,9 @@ class WeatherViewController:UIViewController {
     @objc func goBack(){
         dismiss(animated: true, completion: nil)
     }
+    
     @objc func plusWeather(){
-        let controller = AddCityViewController()
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
+        let controller = AddWeatherViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

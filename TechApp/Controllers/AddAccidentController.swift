@@ -34,7 +34,7 @@ class AddAcidentController :UIViewController {
         return lbl
     }()
     
-    private let yearTextField = CustomTextField(placeholder: " 예시) 2013")
+    private let yearTextField = CustomTextField(placeholder: " 가능년도) 2017-2021")
     private var yearContainerView : InputContainerView {//lazy가능
         return InputContainerView(textField: yearTextField)
     }
@@ -85,7 +85,7 @@ class AddAcidentController :UIViewController {
         guard let year = Int(year) else {
             self.addContents.text = "Only number allowded"
             self.addButton.isHidden = true
-            return}
+            return }
         showLoader(true)
         JsonWebservice.getitem(year: year) { [weak self] vm in
             self?.showLoader(false)
@@ -97,10 +97,7 @@ class AddAcidentController :UIViewController {
     
     @objc func addAccident(){
         guard let vm = accidentVM else {return}
-        self.delegate?.addAccidentAndSave(vm: vm )
-        print("this is vm")
-        print(vm)
-        
+        self.delegate?.addAccidentAndSave(vm: vm )        
     }
     
     // MARK - Helper

@@ -11,20 +11,24 @@ import UIKit
 
 
 private let reuseIdentifier = "AccidentCell"
-protocol AccidentControllerDelegate: class {
+
+protocol AccidentControllerDelegate: AnyObject {
     func controller(vm : AccidentViewModel)
 }
 
-class AccidentsTableController : UITableViewController {
+class AccidentsTableController : UIViewController {
     
     // MARK : Properties
     
-    var accdients : [AccidentViewModel] = [AccidentViewModel]()
-    weak var delegate: AccidentControllerDelegate?
+    @IBOutlet weak var tableView: UITableView!
+    
+    var accdients :[AccidentViewModel] = [AccidentViewModel]()
+    weak var delegate:AccidentControllerDelegate?
     
     // MARK : Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
         configureUI()
         fetchAccidents()
     }
@@ -60,40 +64,45 @@ class AccidentsTableController : UITableViewController {
     }
     
     // MARK : Helpers
-    //바버튼아이템
+    
     func configureUI(){
-        configureTableView()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissal))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action:#selector(addAccident))
     }
     
     func configureTableView(){
+        
         tableView.tableFooterView = UIView()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(AccidentCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
         tableView.rowHeight = 80
     }
 }
 
 extension AccidentsTableController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accdients.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! AccidentCell
         cell.accidentViewModel = accdients[indexPath.row]
+        
         let label = UILabel.init(frame: CGRect(x:0,y:0,width:50,height:cell.frame.height/3))
-            label.text = "saved"
-            cell.accessoryView = label
+        label.text = "saved"
+        cell.accessoryView = label
         cell.accessoryView?.isHidden = true
+        
         return cell
     }
 }
 
 extension AccidentsTableController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        
         if cell?.accessoryView?.isHidden == false {
             cell?.accessoryView?.isHidden.toggle()
         } else {
@@ -102,14 +111,15 @@ extension AccidentsTableController {
         delegate?.controller(vm: accdients[indexPath.row])
     }
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryView?.isHidden = true
-        //위에서 히든 관련햇기때문에 없어도 될듯
     }
     
 }
+extension AccidentsTableController: UITableViewDelegate, UITableViewDataSource {
+}
 
-extension AccidentsTableController : AddAcidentDelegate {
+extension AccidentsTableController: AddAcidentDelegate {
     func addAccidentAndSave( vm: AccidentViewModel) {
         dismiss(animated: true, completion: nil)
         self.accdients.append(vm)

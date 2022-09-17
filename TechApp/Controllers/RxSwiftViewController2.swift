@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 import SnapKit
 
-class RxSwiftViewController2:UITableViewController {
+class RxSwiftViewController2: UITableViewController {
+    
     private let reuseIdentifier = "cell"
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
+    
     func configureUI(){
         view.backgroundColor = .brown
         tableView.register(RxSwift2Cell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -69,5 +71,4 @@ class RxSwift2Cell:UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

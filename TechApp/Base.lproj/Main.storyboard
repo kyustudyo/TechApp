@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nW0-1s-bkO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nW0-1s-bkO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TechApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-287" y="17"/>
-        </scene>
         <!--TechApp -->
         <scene sceneID="jFQ-Gv-K83">
             <objects>
@@ -45,7 +30,7 @@
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="130" id="Cgn-5g-0qN"/>
                                                     <constraint firstAttribute="width" secondItem="k2U-yO-QVg" secondAttribute="height" multiplier="1:1" id="avg-vC-6hT"/>
                                                 </constraints>
-                                                <imageReference key="image" image="naver.jpg" renderingMode="original"/>
+                                                <imageReference key="image" image="me" renderingMode="original"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Dda-td-rrG">
@@ -125,33 +110,42 @@
                                         </subviews>
                                     </stackView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="2" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kTY-1p-grI">
-                                        <rect key="frame" x="0.0" y="145" width="374" height="492.5"/>
+                                        <rect key="frame" x="0.0" y="145" width="374" height="504.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dq-lc-QLp">
-                                        <rect key="frame" x="0.0" y="652.5" width="374" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="664.5" width="374" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="g3d-0x-a1o">
-                                        <rect key="frame" x="0.0" y="688" width="374" height="36"/>
+                                        <rect key="frame" x="0.0" y="694" width="374" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xw-cs-rdp">
-                                                <rect key="frame" x="0.0" y="0.0" width="68.5" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="68.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
-                                                <state key="normal" title="Rest API"/>
+                                                <state key="normal" title="Accident"/>
                                                 <connections>
                                                     <action selector="goToAccident:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="Prj-xM-tqy"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMI-6J-99t">
+                                                <rect key="frame" x="76.5" y="0.0" width="68.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="tintColor" systemColor="linkColor"/>
+                                                <state key="normal" title="Weather"/>
+                                                <connections>
+                                                    <action selector="goWeather:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="pIm-FZ-7NB"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MhR-lu-4UD">
-                                                <rect key="frame" x="76.5" y="0.0" width="68.5" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="153" y="0.0" width="68" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="RxSwift"/>
                                                 <connections>
@@ -159,28 +153,19 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipc-PI-kR7">
-                                                <rect key="frame" x="153" y="0.0" width="68" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="229" y="0.0" width="68.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="RxSwift2"/>
                                                 <connections>
                                                     <action selector="GoRxSwift2:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="6Zq-oG-rgj"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMI-6J-99t">
-                                                <rect key="frame" x="229" y="0.0" width="68.5" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="tintColor" systemColor="linkColor"/>
-                                                <state key="normal" title="weather"/>
-                                                <connections>
-                                                    <action selector="goWeather:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="pIm-FZ-7NB"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-Vg-hD3">
-                                                <rect key="frame" x="305.5" y="0.0" width="68.5" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <rect key="frame" x="305.5" y="0.0" width="68.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
-                                                <state key="normal" title="Reload">
+                                                <state key="normal" title="Update" image="gobackward" catalog="system">
                                                     <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
                                                 <connections>
@@ -240,54 +225,6 @@
             </objects>
             <point key="canvasLocation" x="495.6521739130435" y="16.741071428571427"/>
         </scene>
-        <!--Accidents-->
-        <scene sceneID="lUv-cZ-YPu">
-            <objects>
-                <tableViewController wantsFullScreenLayout="YES" id="feH-ve-lJv" customClass="AccidentsTableController" customModule="TechApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CqV-Z3-P7q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uUf-Wd-kR0" customClass="AccidentCell" customModule="TechApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uUf-Wd-kR0" id="iP2-uO-KfC">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="feH-ve-lJv" id="dfu-Xy-qy5"/>
-                            <outlet property="delegate" destination="feH-ve-lJv" id="MH7-ul-wyy"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Accidents" id="TAw-XZ-x8V"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oDY-ko-tTC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3947.826086956522" y="16.741071428571427"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="qM1-cP-fat">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4JK-me-3RK" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="2lb-88-g6f"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GAd-e8-wrb">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="feH-ve-lJv" kind="relationship" relationship="rootViewController" id="mVj-ue-5kY"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9A8-Wf-9Pp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3037.68115942029" y="16.741071428571427"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="Khn-gF-vh5">
             <objects>
@@ -324,9 +261,82 @@
             </objects>
             <point key="canvasLocation" x="1800.0000000000002" y="-685.04464285714278"/>
         </scene>
+        <!--Accidents-->
+        <scene sceneID="Ks6-VD-AXN">
+            <objects>
+                <viewController storyboardIdentifier="AccidentsTableController" id="AaL-Eo-vYV" customClass="AccidentsTableController" customModule="TechApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lvw-6D-IY6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="셀을 클릭하여 최신 정보를 저장하세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVC-hK-1O4">
+                                <rect key="frame" x="0.0" y="841" width="414" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hs8-Fa-jeE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="753"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Sk4-uC-OFE" customClass="AccidentCell" customModule="TechApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sk4-uC-OFE" id="Ad9-6y-bit">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="AaL-Eo-vYV" id="xme-u3-JME"/>
+                                    <outlet property="delegate" destination="AaL-Eo-vYV" id="xYk-Mx-UcQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="t0R-WR-few"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hs8-Fa-jeE" firstAttribute="leading" secondItem="t0R-WR-few" secondAttribute="leading" id="2Gq-xi-Max"/>
+                            <constraint firstItem="hs8-Fa-jeE" firstAttribute="top" secondItem="t0R-WR-few" secondAttribute="top" id="4kX-ml-X7k"/>
+                            <constraint firstItem="nVC-hK-1O4" firstAttribute="bottom" secondItem="t0R-WR-few" secondAttribute="bottom" id="54Y-fr-M8t"/>
+                            <constraint firstItem="t0R-WR-few" firstAttribute="trailing" secondItem="nVC-hK-1O4" secondAttribute="trailing" id="5mZ-vx-wH5"/>
+                            <constraint firstItem="nVC-hK-1O4" firstAttribute="top" secondItem="hs8-Fa-jeE" secondAttribute="bottom" id="Zpj-tY-neN"/>
+                            <constraint firstItem="nVC-hK-1O4" firstAttribute="leading" secondItem="t0R-WR-few" secondAttribute="leading" id="bBO-V7-1Gc"/>
+                            <constraint firstItem="t0R-WR-few" firstAttribute="trailing" secondItem="hs8-Fa-jeE" secondAttribute="trailing" id="e0n-wn-GSg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Accidents" id="N06-II-2Cn"/>
+                    <connections>
+                        <outlet property="tableView" destination="hs8-Fa-jeE" id="ph6-05-zdT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ww-tn-JCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5642.0289855072469" y="16.741071428571427"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4Jf-4y-PG1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMC-tL-9q4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Hd-Ta-TRk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AaL-Eo-vYV" kind="relationship" relationship="rootViewController" id="0vw-Q7-C2q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q4V-t6-bWd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4731.884057971015" y="16.741071428571427"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="naver.jpg" width="200" height="300"/>
+        <image name="gobackward" catalog="system" width="121" height="128"/>
+        <image name="me" width="298" height="364"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

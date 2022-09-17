@@ -8,7 +8,7 @@
 import Foundation
 
 class LocationAndInjuredViewModel {
-    private let accident: multipleInfo?
+    private let accident: LocationInjured?
     
     var location : String {
         return accident?.spot_nm ?? ""
@@ -16,7 +16,7 @@ class LocationAndInjuredViewModel {
     var injured : Int  {
         return accident?.sl_dnv_cnt ?? 0
     }
-    init(accident:multipleInfo){
+    init(accident:LocationInjured){
         self.accident = accident
     }
 }

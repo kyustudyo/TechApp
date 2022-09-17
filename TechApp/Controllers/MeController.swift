@@ -12,10 +12,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MeViewController: UIViewController {//디스크에서 가져오기.
+class MeViewController: UIViewController {
    
     // MARK - Properties
-    
     @IBOutlet weak var imageVIew: UIImageView!
     @IBOutlet var name: UILabel?
     @IBOutlet var field: UILabel?
@@ -23,9 +22,10 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
     @IBOutlet var contents: UITextView!
     
     @IBOutlet weak var cautionLabel: UILabel!
-    private var locationAndInjuredVM : LocationAndInjuredViewModel?
+    private var locationAndInjuredVM : LocationAndInjuredViewModel = LocationAndInjuredViewModel(accident: LocationInjured.Dummy)
     private var myInformationVM: MyInfoViewModel?
     private let disposeBag = DisposeBag()
+    
     // MARK - Lifecycle
     
     override func viewDidLoad() {
@@ -84,7 +84,7 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
     }
     
     @IBAction func goToAccident(_ sender: UIButton) {
-        let controller = AccidentsTableController()
+        guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "AccidentsTableController") as? AccidentsTableController else { return }
         controller.delegate = self
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
@@ -106,39 +106,36 @@ class MeViewController: UIViewController {//디스크에서 가져오기.
         present(nav, animated: true, completion: nil)
     }
     
-    
     @IBAction func GoRxSwift(_ sender: UIButton) {
         let controller = RxSwiftViewController()
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
-        
-    }
-    
-    
-    
-    @IBAction func fetchAccident(_ sender: UIButton) {
-        showLoader(true)
-        self.fetchAccidentFromFirebase{
-            self.showLoader(false)
-        }
-        //showLoader(false)
     }
 
-    private func fetchAccidentFromFirebase(completion : @escaping () -> Void){
-        FirebaseWebservice.fetchAccident {  accident in
-                self.locationAndInjuredVM = LocationAndInjuredViewModel(accident: accident)
-            self.contents.text = self.contents.text +  "\n\(self.locationAndInjuredVM!.location)에서\n\(self.locationAndInjuredVM!.injured)명 사고 발생했습니다."
+    @IBAction func fetchAccident(_ sender: UIButton) {
+        showLoader(true)
+        self.fetchAccidentFromFirebase {
+            self.showLoader(false)
+        }
+    }
+
+    private func fetchAccidentFromFirebase(completion : @escaping () -> Void) {
+        FirebaseWebservice.fetchAccident { accident in
+            self.locationAndInjuredVM = LocationAndInjuredViewModel(accident: accident)
+            self.contents.text += "\n\(self.locationAndInjuredVM.location)에서\n\(self.locationAndInjuredVM.injured)명 사고 발생했습니다."
             completion()
-            //self.showLoader(false)
         }
     }
 }
+
 extension MeViewController : AccidentControllerDelegate {
+    //MARK: 최신 정보 load
     func controller( vm: AccidentViewModel) {
-        guard let resultInjured = vm.resultInjured , let resultLocation = vm.resultLocation else {return}
-        let data = ["location":resultLocation,"injured":resultInjured] as [String:Any]
-        //hash형태로
+        guard let resultInjured = vm.resultInjured,
+              let resultLocation = vm.resultLocation
+              else {return}
+        let data = ["location":resultLocation, "injured":resultInjured] as [String:Any]
        COLLECTION_ACCIDENT.document("data").setData(data) { error in
             if let error = error { print(error.localizedDescription)
                 return
@@ -149,10 +146,7 @@ extension MeViewController : AccidentControllerDelegate {
 
 
 extension MeViewController {
-    
     enum FileReadError: Error {
       case fileNotFound, unreadable, encodingFailed
     }
-    
-    
 }

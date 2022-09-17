@@ -8,25 +8,20 @@
 import Foundation
 import Firebase
 
-//result 이용하자.
 class FirebaseWebservice {
     static func fetchMyInfo(completion: @escaping (MyInformation)->Void) {
-        let query = COLLECTION_MYINFO.document("itsMe").getDocument { snapshot, error in
+        let _ = COLLECTION_MYINFO.document("itsMe").getDocument { snapshot, error in
             guard let dictionary = snapshot?.data() else {return}
-            print("dict:",dictionary)
             let info = MyInformation.init(dictionary: dictionary)
-            //print(info)
-            
             completion(info)
         }
     }
     
-    static func fetchAccident(completion: @escaping (multipleInfo)->Void){
-        let query = COLLECTION_ACCIDENT.document("data").getDocument { snapshot, error in
+    static func fetchAccident(completion: @escaping (LocationInjured)->Void) {
+        let _ = COLLECTION_ACCIDENT.document("data").getDocument { snapshot, error in
             guard let dictionary = snapshot?.data() else {return}
-            let accident = multipleInfo(dictionary: dictionary)
+            let accident = LocationInjured(dictionary: dictionary)
             completion(accident)
-            
         }
     }
 }
