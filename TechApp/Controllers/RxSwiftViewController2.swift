@@ -19,8 +19,14 @@ class RxSwiftViewController2: UITableViewController {
     
     func configureUI(){
         view.backgroundColor = .brown
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(goBack))
+        
         tableView.register(RxSwift2Cell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 50
+    }
+    
+    @objc private func goBack(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

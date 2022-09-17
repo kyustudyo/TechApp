@@ -100,6 +100,7 @@ extension AccidentsTableController {
         label.text = "saved"
         cell.accessoryView = label
         cell.accessoryView?.isHidden = true
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -107,12 +108,14 @@ extension AccidentsTableController {
 
 extension AccidentsTableController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let cell = tableView.cellForRow(at: indexPath)
         if cell?.accessoryView?.isHidden == false {
             cell?.accessoryView?.isHidden.toggle()
         } else {
             cell?.accessoryView?.isHidden = false
         }
+        
         delegate?.controller(vm: locationAndInjuredViewModels[indexPath.row])
     }
     

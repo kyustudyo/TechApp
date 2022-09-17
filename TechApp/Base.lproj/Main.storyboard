@@ -167,7 +167,7 @@
                                                 <rect key="frame" x="305.5" y="0.0" width="68.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
-                                                <state key="normal" title="RxSwift2"/>
+                                                <state key="normal" title="NotYet"/>
                                                 <connections>
                                                     <action selector="GoRxSwift2:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="6Zq-oG-rgj"/>
                                                 </connections>
