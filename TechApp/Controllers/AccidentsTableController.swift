@@ -13,7 +13,7 @@ import UIKit
 private let reuseIdentifier = "AccidentCell"
 
 protocol AccidentControllerDelegate: AnyObject {
-    func controller(vm : AccidentViewModel)
+    func controller(vm : LocationAndInjuredViewModel)
 }
 
 class AccidentsTableController : UIViewController {
@@ -22,7 +22,7 @@ class AccidentsTableController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var accdients :[AccidentViewModel] = [AccidentViewModel]()
+    var locationAndInjuredViewModels :[LocationAndInjuredViewModel] = [LocationAndInjuredViewModel(locationInjured: LocationInjuredDTO.Dummy)]
     weak var delegate:AccidentControllerDelegate?
     
     // MARK : Lifecycle
@@ -56,11 +56,17 @@ class AccidentsTableController : UIViewController {
     
     func fetchAccidents(){
         showLoader(true)
-        JsonWebservice.getitem(year: 2018) { [weak self] vm in
+        FirebaseWebservice.fetchAllAccident { [weak self] accidents in
             self?.showLoader(false)
-            self?.accdients.append(vm)
+            self?.locationAndInjuredViewModels = accidents.map{LocationAndInjuredViewModel(locationInjured: $0)}
             self?.tableView.reloadData()
         }
+        
+//        JsonWebservice.getitem(year: 2018) { [weak self] vm in
+//            self?.showLoader(false)
+//            self?.accidentViewModels.append(vm)
+//            self?.tableView.reloadData()
+//        }
     }
     
     // MARK : Helpers
@@ -73,7 +79,6 @@ class AccidentsTableController : UIViewController {
     func configureTableView(){
         
         tableView.tableFooterView = UIView()
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AccidentCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -84,12 +89,12 @@ class AccidentsTableController : UIViewController {
 
 extension AccidentsTableController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return accdients.count
+        return locationAndInjuredViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! AccidentCell
-        cell.accidentViewModel = accdients[indexPath.row]
+        cell.accidentViewModel = locationAndInjuredViewModels[indexPath.row]
         
         let label = UILabel.init(frame: CGRect(x:0,y:0,width:50,height:cell.frame.height/3))
         label.text = "saved"
@@ -108,7 +113,7 @@ extension AccidentsTableController {
         } else {
             cell?.accessoryView?.isHidden = false
         }
-        delegate?.controller(vm: accdients[indexPath.row])
+        delegate?.controller(vm: locationAndInjuredViewModels[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -116,13 +121,23 @@ extension AccidentsTableController {
     }
     
 }
+
 extension AccidentsTableController: UITableViewDelegate, UITableViewDataSource {
 }
 
+//Delegate를 통한 data 전달.
 extension AccidentsTableController: AddAcidentDelegate {
-    func addAccidentAndSave( vm: AccidentViewModel) {
+    func addAccidentAndSave( vm: LocationAndInjuredViewModel) {
         dismiss(animated: true, completion: nil)
-        self.accdients.append(vm)
-        tableView.reloadData()
+        
+        let data = ["location":vm.location, "injured":vm.injured] as [String:Any]
+        let uuid = UUID().uuidString
+        COLLECTION_ACCIDENT.document(uuid).setData(data) { error in
+            if let error = error { print(error.localizedDescription)
+                return
+            }
+        }
+        self.fetchAccidents()
+        
     }
 }

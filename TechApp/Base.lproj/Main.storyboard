@@ -85,7 +85,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qnP-tZ-4wm">
                                                         <rect key="frame" x="0.0" y="89" width="228" height="41"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" text="지원회사" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQ6-0S-9yA">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" text="😁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQ6-0S-9yA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="59" height="41"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="59" id="wBu-JY-Iiv"/>
@@ -134,8 +134,19 @@
                                                     <action selector="goToAccident:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="Prj-xM-tqy"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMI-6J-99t">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-Vg-hD3">
                                                 <rect key="frame" x="76.5" y="0.0" width="68.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="tintColor" systemColor="linkColor"/>
+                                                <state key="normal" title="Update" image="gobackward" catalog="system">
+                                                    <color key="titleColor" systemColor="linkColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="fetchAccident:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="0nF-HO-8JM"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMI-6J-99t">
+                                                <rect key="frame" x="153" y="0.0" width="68" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="Weather"/>
@@ -144,7 +155,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MhR-lu-4UD">
-                                                <rect key="frame" x="153" y="0.0" width="68" height="30"/>
+                                                <rect key="frame" x="229" y="0.0" width="68.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="RxSwift"/>
@@ -153,23 +164,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipc-PI-kR7">
-                                                <rect key="frame" x="229" y="0.0" width="68.5" height="30"/>
+                                                <rect key="frame" x="305.5" y="0.0" width="68.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
                                                 <state key="normal" title="RxSwift2"/>
                                                 <connections>
                                                     <action selector="GoRxSwift2:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="6Zq-oG-rgj"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-Vg-hD3">
-                                                <rect key="frame" x="305.5" y="0.0" width="68.5" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="tintColor" systemColor="linkColor"/>
-                                                <state key="normal" title="Update" image="gobackward" catalog="system">
-                                                    <color key="titleColor" systemColor="linkColor"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="fetchAccident:" destination="J6r-Dc-xYl" eventType="touchUpInside" id="0nF-HO-8JM"/>
                                                 </connections>
                                             </button>
                                         </subviews>

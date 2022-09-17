@@ -14,7 +14,7 @@ class AccidentCell: UITableViewCell {
     
     // MARK : Properties
     
-    var accidentViewModel: AccidentViewModel? {
+    var accidentViewModel: LocationAndInjuredViewModel? {
         didSet{ configure()}
     }
     private let profileImageView: UIImageView = {
@@ -59,8 +59,8 @@ class AccidentCell: UITableViewCell {
     
     func configure(){
         guard let viewModel = accidentViewModel else {return}
-        usernameLabel.text = viewModel.resultLocation
-        fullnameLabel.text = "중상자 수: \(viewModel.resultInjured ?? 0) 명"
+        usernameLabel.text = viewModel.location
+        fullnameLabel.text = "중상자 수: \(viewModel.injured) 명"
         
     }
 }

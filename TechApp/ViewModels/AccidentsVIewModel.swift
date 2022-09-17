@@ -8,20 +8,22 @@
 import Foundation
 
 class LocationAndInjuredViewModel {
-    private let accident: LocationInjured?
+    
+    private let locationInjured: LocationInjuredDTO?
     
     var location : String {
-        return accident?.spot_nm ?? ""
+        return locationInjured?.spot_nm ?? ""
     }
     var injured : Int  {
-        return accident?.sl_dnv_cnt ?? 0
+        return locationInjured?.sl_dnv_cnt ?? 0
     }
-    init(accident:LocationInjured){
-        self.accident = accident
+    init(locationInjured: LocationInjuredDTO){
+        self.locationInjured = locationInjured
     }
 }
 
 class AccidentViewModel {
+    
     private let accident : Accident?
     //lazy var isThereData = false//
     var resultCode: String {
@@ -30,17 +32,17 @@ class AccidentViewModel {
     var resultMsg:String{
         return accident?.resultMsg ?? ""
     }
-    var resultLocation:String? {
+    var resultLocation:String {
         return accident?.items.item.first?.spot_nm ?? "no data"
         // 그당시 데이터 없을경우.
     }
-    var resultInjured: Int?{
+    var resultInjured: Int {
         return accident?.items.item.first?.sl_dnv_cnt ?? 0
     }
-    var isThereData: Bool? {
-        if let data = accident?.items.item.first?.spot_nm {
+    var isThereData: Bool {
+        if let _ = accident?.items.item.first?.spot_nm {
             return false
-        } else {return true}
+        } else { return true }
     }
     
     

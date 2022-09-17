@@ -22,7 +22,7 @@ class MeViewController: UIViewController {
     @IBOutlet var contents: UITextView!
     
     @IBOutlet weak var cautionLabel: UILabel!
-    private var locationAndInjuredVM : LocationAndInjuredViewModel = LocationAndInjuredViewModel(accident: LocationInjured.Dummy)
+    private var locationAndInjuredVM : LocationAndInjuredViewModel = LocationAndInjuredViewModel(locationInjured: LocationInjuredDTO.Dummy)
     private var myInformationVM: MyInfoViewModel?
     private let disposeBag = DisposeBag()
     
@@ -85,7 +85,9 @@ class MeViewController: UIViewController {
     
     @IBAction func goToAccident(_ sender: UIButton) {
         guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "AccidentsTableController") as? AccidentsTableController else { return }
+    
         controller.delegate = self
+        
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -121,8 +123,8 @@ class MeViewController: UIViewController {
     }
 
     private func fetchAccidentFromFirebase(completion : @escaping () -> Void) {
-        FirebaseWebservice.fetchAccident { accident in
-            self.locationAndInjuredVM = LocationAndInjuredViewModel(accident: accident)
+        FirebaseWebservice.fetchCurrentAccident { accident in
+            self.locationAndInjuredVM = LocationAndInjuredViewModel(locationInjured: accident)
             self.contents.text += "\n\(self.locationAndInjuredVM.location)에서\n\(self.locationAndInjuredVM.injured)명 사고 발생했습니다."
             completion()
         }
@@ -131,19 +133,14 @@ class MeViewController: UIViewController {
 
 extension MeViewController : AccidentControllerDelegate {
     //MARK: 최신 정보 load
-    func controller( vm: AccidentViewModel) {
-        guard let resultInjured = vm.resultInjured,
-              let resultLocation = vm.resultLocation
-              else {return}
-        let data = ["location":resultLocation, "injured":resultInjured] as [String:Any]
-       COLLECTION_ACCIDENT.document("data").setData(data) { error in
-            if let error = error { print(error.localizedDescription)
-                return
-            }
+    func controller( vm: LocationAndInjuredViewModel) {
+        
+        showLoader(true)
+        FirebaseWebservice.saveCurrentAccident(vm: vm) {
+            self.showLoader(false)
         }
     }
 }
-
 
 extension MeViewController {
     enum FileReadError: Error {

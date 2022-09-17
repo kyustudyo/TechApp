@@ -10,6 +10,7 @@ import Firebase
 
 let COLLECTION_MYINFO = Firestore.firestore().collection("itsMe")
 let COLLECTION_ACCIDENT = Firestore.firestore().collection("AccidentData")
+let COLLECTION_CURRENT_ACCIDENT = Firestore.firestore().collection("currentAccidentData")
 
 struct Constants {
     struct Urls {

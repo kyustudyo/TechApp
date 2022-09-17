@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddAcidentDelegate : class {
-    func addAccidentAndSave(vm: AccidentViewModel)
+    func addAccidentAndSave(vm: LocationAndInjuredViewModel)
 }
 
 class AddAcidentController :UIViewController {
@@ -89,7 +89,7 @@ class AddAcidentController :UIViewController {
         showLoader(true)
         JsonWebservice.getitem(year: year) { [weak self] vm in
             self?.showLoader(false)
-            self?.addButton.isHidden = vm.isThereData!//데이터가 있으면 보이기.
+            self?.addButton.isHidden = vm.isThereData//데이터가 있으면 보이기.
             self?.accidentVM = vm
             self?.addContents.text = vm.resultLocation
         }
@@ -97,7 +97,8 @@ class AddAcidentController :UIViewController {
     
     @objc func addAccident(){
         guard let vm = accidentVM else {return}
-        self.delegate?.addAccidentAndSave(vm: vm )        
+        let locationAndInjuredViewmodel = LocationAndInjuredViewModel(locationInjured: LocationInjuredDTO(name: vm.resultLocation, number: vm.resultInjured))
+        self.delegate?.addAccidentAndSave(vm: locationAndInjuredViewmodel)
     }
     
     // MARK - Helper

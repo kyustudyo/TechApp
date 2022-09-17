@@ -109,6 +109,7 @@ class RxSwiftViewController : UIViewController{
     }
     
     private func configureRxSwift(){
+        
         textFeild.rx.text ~> viewModel.text ~
         viewModel.textCount ~> countLabel.rx.text
         ~
@@ -118,7 +119,6 @@ class RxSwiftViewController : UIViewController{
             self.updateProgress(to: $0)
         }).disposed(by: disposeBag)
         
-        //rx instead of adding target.
         deactivateConstraintButton.rx.controlEvent(.touchUpInside)
             .asObservable()
             .subscribe(onNext:{
@@ -126,8 +126,6 @@ class RxSwiftViewController : UIViewController{
                 self.leftConstraint?.deactivate()
             }).disposed(by: disposeBag)
     }
-    
-    
     
     private func createConstraints(){
         
@@ -149,6 +147,7 @@ class RxSwiftViewController : UIViewController{
             $0.height.equalTo(16)
             $0.leading.equalToSuperview()
         }
+        
         constraintLabel.snp.makeConstraints { (make) -> Void in
             self.topConstraint = make.top.equalTo(ProgressView.snp_bottomMargin).offset(20).constraint
             
@@ -156,6 +155,7 @@ class RxSwiftViewController : UIViewController{
             
             make.height.equalTo(80)
         }
+        
         let stack = UIStackView(arrangedSubviews: [deactivateConstraintButton,activateConstraintButton,updateConstraintButton,remakeConstraintButton])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
@@ -165,16 +165,11 @@ class RxSwiftViewController : UIViewController{
             $0.top.equalTo(constraintLabel.snp_bottomMargin).offset(80)
             $0.leading.equalToSuperview().offset(8)
             $0.trailing.equalToSuperview().offset(-8)
-                    }
-        
-        
+        }
     }
     
 // MARK: - Helpers
-//    @objc func applyConstraint(){
-//        topConstraint?.deactivate()
-//        leftConstraint?.deactivate()
-//    }
+
     @objc func applyConstraint2(){
         topConstraint?.activate()
         leftConstraint?.activate()
@@ -203,18 +198,4 @@ class RxSwiftViewController : UIViewController{
     @objc private func goBack(){
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
-
-
-
-
-//// when making constraints
-//
-//
-//...
-//// then later you can call
-//self.topConstraint.deactivate()
-//
-//// or if you want to update the constraint
-//self.topConstraint.updateOffset(5)
